@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E Royce Service Manager — High-Fidelity Wireframes</title>
+  <link rel="stylesheet" href="css/design-system.css" />
+</head>
+<body>
+  <div class="studio">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-row">
+          <div class="logo-mark">ER</div>
+          <div>
+            <div class="brand-name">E Royce Service Manager</div>
+            <div class="brand-sub">Live Tracking · Field Service UX</div>
+          </div>
+        </div>
+        <div class="badge-deck">42 Screens · Client Presentation</div>
+      </div>
+      <div class="screen-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="search" placeholder="Search screens…" autocomplete="off" />
+      </div>
+      <div class="screen-list" id="screenList"></div>
+    </aside>
+
+    <main class="stage">
+      <div class="stage-toolbar">
+        <button class="tool-btn active" id="themeDark" type="button">Dark Mode</button>
+        <button class="tool-btn" id="themeLight" type="button">Light Mode</button>
+        <div class="tool-divider"></div>
+        <button class="tool-btn" id="prevBtn" type="button">← Prev</button>
+        <button class="tool-btn" id="nextBtn" type="button">Next →</button>
+      </div>
+
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" id="phoneScreen" data-theme="dark"></div>
+      </div>
+
+      <div class="stage-meta">
+        <div class="nav-arrows">
+          <button type="button" id="prevBtn2" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" id="nextBtn2" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <span id="counterLabel">Screen 01 / 42</span>
+        <span>· Premium Enterprise UI</span>
+      </div>
+    </main>
+
+    <aside class="specs" id="specsPanel">
+      <h2 id="specTitle">Splash Screen</h2>
+      <div class="screen-id" id="specId">SCREEN 01</div>
+      <div class="spec-card">
+        <h3>Purpose</h3>
+        <p id="specPurpose"></p>
+      </div>
+      <div class="spec-card">
+        <h3>Key Elements</h3>
+        <ul id="specElements"></ul>
+      </div>
+      <div class="spec-card">
+        <h3>Flow Position</h3>
+        <div class="spec-flow" id="specFlow"></div>
+      </div>
+      <div class="spec-card">
+        <h3>Brand Palette</h3>
+        <div class="palette-row">
+          <div class="swatch" style="background:#10B981" title="Primary"></div>
+          <div class="swatch" style="background:#0F172A" title="Secondary"></div>
+          <div class="swatch" style="background:#2563EB" title="Accent"></div>
+          <div class="swatch" style="background:#F59E0B" title="Warning"></div>
+          <div class="swatch" style="background:#EF4444" title="Danger"></div>
+          <div class="swatch" style="background:#22C55E" title="Success"></div>
+          <div class="swatch" style="background:#0B1220" title="BG Dark"></div>
+          <div class="swatch" style="background:#111827" title="Card Dark"></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h3>Design Notes</h3>
+        <p id="specNotes"></p>
+      </div>
+    </aside>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/screens-a.js"></script>
+  <script src="js/screens-b.js"></script>
+  <script src="js/screens-c.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
