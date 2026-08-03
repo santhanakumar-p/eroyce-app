@@ -1,7 +1,7 @@
-/* E Royce Service Manager — Screens 17–31 (Quotation → Service Execution) */
+/* E Royce Service Manager — Screens 16–29 (Quotation → Service Execution) */
 const SCREENS_B = [
   {
-    num: 17,
+    num: 16,
     title: 'Select Service Items',
     group: 'Quotation',
     purpose: 'Let the field engineer pick billable EV service tasks from a priced checklist before building the quotation.',
@@ -116,7 +116,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 18,
+    num: 17,
     title: 'Add Labour Charges',
     group: 'Quotation',
     purpose: 'Capture technician labour hours and hourly rate to compute labour line totals for the quotation.',
@@ -209,7 +209,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 19,
+    num: 18,
     title: 'Add Spare Parts',
     group: 'Quotation',
     purpose: 'Add inventory spare parts with quantity controls and optional barcode scan for accurate part picking.',
@@ -288,7 +288,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 20,
+    num: 19,
     title: 'Quotation Preview',
     group: 'Quotation',
     purpose: 'Show a print-ready quotation document preview before sending to the customer for approval.',
@@ -366,7 +366,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 21,
+    num: 20,
     title: 'Edit Quotation',
     group: 'Quotation',
     purpose: 'Allow last-minute edits to quotation line items with live total recalculation before sending.',
@@ -456,7 +456,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 22,
+    num: 21,
     title: 'Apply Discount',
     group: 'Quotation',
     purpose: 'Apply authorised percentage or flat discounts with clear before/after pricing for customer transparency.',
@@ -525,7 +525,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 23,
+    num: 22,
     title: 'Add Notes',
     group: 'Quotation',
     purpose: 'Capture internal technician notes and optional customer-visible remarks before sending the quotation.',
@@ -572,7 +572,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 24,
+    num: 23,
     title: 'Send PDF',
     group: 'Quotation',
     purpose: 'Choose delivery channel and send the generated quotation PDF to the customer.',
@@ -642,7 +642,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 25,
+    num: 24,
     title: 'WhatsApp Preview',
     group: 'Quotation',
     purpose: 'Preview exactly how the quotation message will appear in the customer WhatsApp chat.',
@@ -699,7 +699,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 26,
+    num: 25,
     title: 'SMS Preview',
     group: 'Quotation',
     purpose: 'Preview the SMS fallback message with short approval link for customers without WhatsApp.',
@@ -755,7 +755,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 27,
+    num: 26,
     title: 'Waiting Customer Approval',
     group: 'Approval',
     purpose: 'Show pending state while the customer reviews and approves the quotation via link or app.',
@@ -828,7 +828,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 28,
+    num: 27,
     title: 'Customer Approved',
     group: 'Approval',
     purpose: 'Confirm customer quotation approval and prompt the engineer to begin service work.',
@@ -883,7 +883,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 29,
+    num: 28,
     title: 'Service In Progress',
     group: 'Service Execution',
     purpose: 'Track active service job with running timer, checklist progress, and pause/complete controls.',
@@ -963,7 +963,7 @@ const SCREENS_B = [
     },
   },
   {
-    num: 30,
+    num: 29,
     title: 'Upload Before Photos',
     group: 'Service Execution',
     purpose: 'Capture mandatory pre-service vehicle photos for documentation and dispute protection.',

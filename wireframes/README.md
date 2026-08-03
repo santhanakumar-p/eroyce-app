@@ -22,52 +22,63 @@
 | Light Mode | Toolbar **Light Mode** or press `L` |
 | Specs panel | Right panel — purpose, elements, flow position |
 
-## Screen inventory (42)
+## Screen inventory (41)
 
 | # | Screen | Flow |
 |---|--------|------|
 | 01 | Splash Screen | Auth |
-| 02 | Login | Auth |
-| 03 | Waiting For Admin Approval | Auth |
-| 04 | Admin Approved | Auth |
-| 05 | OTP Verification | Auth |
-| 06 | Dashboard | Home |
-| 07 | Today's Tasks | Tasks |
-| 08 | Task Details | Tasks |
-| 09 | Customer Details | Tasks |
-| 10 | Vehicle Details | Tasks |
-| 11 | Navigate To Customer | Navigation |
-| 12 | Live GPS Tracking | Navigation (OpenStreetMap / MapLibre style — **no Google Maps**) |
-| 13 | Reach Customer | Navigation |
-| 14 | Start Service OTP | Service |
-| 15 | Service Checklist | Service |
-| 16 | Vehicle Inspection | Service |
-| 17 | Select Service Items | Quotation |
-| 18 | Add Labour Charges | Quotation |
-| 19 | Add Spare Parts | Quotation |
-| 20 | Quotation Preview | Quotation |
-| 21 | Edit Quotation | Quotation |
-| 22 | Apply Discount | Quotation |
-| 23 | Add Notes | Quotation |
-| 24 | Send PDF | Quotation |
-| 25 | WhatsApp Preview | Quotation |
-| 26 | SMS Preview | Quotation |
-| 27 | Waiting Customer Approval | Approval |
-| 28 | Customer Approved | Approval |
-| 29 | Service In Progress | Execution |
-| 30 | Upload Before Photos | Execution |
-| 31 | Upload After Photos | Execution |
-| 32 | Invoice Preview | Billing |
-| 33 | Invoice PDF | Billing |
-| 34 | Send Invoice | Billing |
-| 35 | QR Payment | Billing |
-| 36 | Payment Success | Billing |
-| 37 | End Service OTP | Completion (after payment only) |
-| 38 | Service Completed | Completion |
-| 39 | Service History | Profile |
-| 40 | Notifications | Alerts |
-| 41 | Profile | Profile |
-| 42 | Settings | Profile |
+| 02 | Login (Mobile + Password) | Auth |
+| 03 | Check In | Attendance |
+| 04 | Check Out | Attendance |
+| 05 | Dashboard | Home |
+| 06 | Today's Tasks | Tasks |
+| 07 | Task Details | Tasks |
+| 08 | Customer Details | Tasks |
+| 09 | Vehicle Details | Tasks |
+| 10 | Navigate To Customer | Navigation |
+| 11 | Live GPS Tracking | Navigation (OpenStreetMap / MapLibre style — **no Google Maps**) |
+| 12 | Reach Customer | Navigation |
+| 13 | Start Service OTP | Service |
+| 14 | Service Checklist | Service |
+| 15 | Vehicle Inspection | Service |
+| 16 | Select Service Items | Quotation |
+| 17 | Add Labour Charges | Quotation |
+| 18 | Add Spare Parts | Quotation |
+| 19 | Quotation Preview | Quotation |
+| 20 | Edit Quotation | Quotation |
+| 21 | Apply Discount | Quotation |
+| 22 | Add Notes | Quotation |
+| 23 | Send PDF | Quotation |
+| 24 | WhatsApp Preview | Quotation |
+| 25 | SMS Preview | Quotation |
+| 26 | Waiting Customer Approval | Approval |
+| 27 | Customer Approved | Approval |
+| 28 | Service In Progress | Execution |
+| 29 | Upload Before Photos | Execution |
+| 30 | Upload After Photos | Execution |
+| 31 | Invoice Preview | Billing |
+| 32 | Invoice PDF | Billing |
+| 33 | Send Invoice | Billing |
+| 34 | QR Payment | Billing |
+| 35 | Payment Success | Billing |
+| 36 | End Service OTP | Completion (after payment only) |
+| 37 | Service Completed | Completion |
+| 38 | Service History | Profile |
+| 39 | Notifications | Alerts |
+| 40 | Profile | Profile |
+| 41 | Settings | Profile |
+
+## Auth & attendance flow
+
+```
+Splash → Login (mobile + password) → Check In (GPS attendance) → Dashboard
+      → … field work …
+      → Check Out (end of shift) from Home or Profile
+```
+
+- **Username:** registered mobile number (+91)
+- **Password:** required on Login
+- **Attendance:** mandatory Check In after login; Check Out at shift end
 
 ## Design system
 

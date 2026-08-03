@@ -1,7 +1,7 @@
-/* E Royce Service Manager — Screens 31–42 (Completion, Billing, Profile) */
+/* E Royce Service Manager — Screens 30–41 (Completion, Billing, Profile) */
 const SCREENS_C = [
   {
-    num: 31,
+    num: 30,
     title: 'Upload After Photos',
     group: 'Service Completion',
     purpose: 'Capture post-service evidence photos for audit trail and before/after comparison.',
@@ -71,7 +71,7 @@ ${header('After Photos', { right: I.cam })}
 
 
   {
-    num: 32,
+    num: 31,
     title: 'Invoice Preview',
     group: 'Billing',
     purpose: 'Review generated tax invoice before sharing with customer or initiating payment.',
@@ -150,7 +150,7 @@ ${header('Invoice Preview', { right: I.pdf })}
   },
 
   {
-    num: 33,
+    num: 32,
     title: 'Invoice PDF',
     group: 'Billing',
     purpose: 'Full-screen PDF viewer for invoice document with download and share actions.',
@@ -222,7 +222,7 @@ ${header('Invoice Preview', { right: I.pdf })}
   },
 
   {
-    num: 34,
+    num: 33,
     title: 'Send Invoice',
     group: 'Billing',
     purpose: 'Choose delivery channel to send invoice to customer with preview thumbnail.',
@@ -297,7 +297,7 @@ ${header('Send Invoice')}
   },
 
   {
-    num: 35,
+    num: 34,
     title: 'QR Payment',
     group: 'Billing',
     purpose: 'Display UPI QR code for instant customer payment at service location.',
@@ -372,7 +372,7 @@ ${header('Collect Payment', { right: I.qr })}
   },
 
   {
-    num: 36,
+    num: 35,
     title: 'Payment Success',
     group: 'Billing',
     purpose: 'Confirm successful UPI payment and display transaction reference.',
@@ -429,7 +429,7 @@ ${header('Collect Payment', { right: I.qr })}
   },
 
   {
-    num: 37,
+    num: 36,
     title: 'End Service OTP',
     group: 'Service Completion',
     purpose: 'Post-payment customer OTP to close the job after payment success.',
@@ -478,7 +478,7 @@ ${header('End Service OTP')}
   },
 
   {
-    num: 38,
+    num: 37,
     title: 'Service Completed',
     group: 'Service Completion',
     purpose: 'Celebrate job completion with summary metrics and return to dashboard.',
@@ -529,7 +529,7 @@ ${header('End Service OTP')}
 
 
   {
-    num: 39,
+    num: 38,
     title: 'Service History',
     group: 'History',
     purpose: 'Browse past completed jobs with filters, amounts, ratings, and dates.',
@@ -599,7 +599,7 @@ ${bottomNav('tasks')}`;
   },
 
   {
-    num: 40,
+    num: 39,
     title: 'Notifications',
     group: 'Alerts',
     purpose: 'Central inbox for push notifications across approvals, payments, tasks, and sync events.',
@@ -650,19 +650,22 @@ ${bottomNav('notifications')}`;
   },
 
   {
-    num: 41,
+    num: 40,
     title: 'Profile',
     group: 'Profile',
-    purpose: 'Engineer profile hub with stats, credentials, and settings menu shortcuts.',
+    purpose: 'Engineer profile hub with stats, attendance shortcuts, credentials, and settings menu.',
     elements: [
       'Arjun Mehta avatar and stats',
+      'Attendance check-in status',
+      'Check Out CTA',
       'Rating 4.8 · 1,284 jobs',
-      'Menu rows Documents, Digital Signature, Language, Offline Mode, GPS Sync',
+      'Menu rows Attendance, Documents, Digital Signature, Language, Offline Mode, GPS Sync',
       'Bottom nav Profile active',
     ],
-    notes: 'Emp ID ER-ENG-2041. Profile photo synced from HR portal. Tap Settings for app preferences.',
+    notes: 'Emp ID ER-ENG-2041. Check Out available when shift is active. Tap Settings for app preferences.',
     render() {
       const menuItems = [
+        { icon: I.clock, label: 'Attendance', sub: 'Checked in 08:58 AM · Tap to check out' },
         { icon: I.pdf, label: 'Documents', sub: 'ID, certifications, insurance' },
         { icon: I.edit, label: 'Digital Signature', sub: 'Registered signature on file' },
         { icon: '🌐', label: 'Language', sub: 'English (India)', emoji: true },
@@ -691,6 +694,15 @@ ${header('Profile', { back: false, right: I.settings })}
           <div class="fw-8 text-primary" style="font-size:18px">47</div>
           <div class="text-sec" style="font-size:10px">This Month</div>
         </div>
+      </div>
+    </div>
+    <div class="card glass mb-16" style="padding:12px 14px">
+      <div class="flex items-center justify-between">
+        <div>
+          <div style="font-size:12px;font-weight:650">${I.check} Checked In · 08:58 AM</div>
+          <div class="text-muted" style="font-size:11px;margin-top:2px">Shift active · Koramangala Depot</div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="padding:8px 12px;font-size:11px">${I.logout} Check Out</button>
       </div>
     </div>
     <div class="grid-2 gap-8 mb-16">
@@ -724,7 +736,7 @@ ${bottomNav('profile')}`;
   },
 
   {
-    num: 42,
+    num: 41,
     title: 'Settings',
     group: 'Profile',
     purpose: 'Application preferences including theme, notifications, offline mode, and map provider.',

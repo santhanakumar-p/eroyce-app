@@ -1,4 +1,4 @@
-/* E Royce Service Manager — Screens 01–16 (Auth, Dashboard, Tasks, Navigation) */
+/* E Royce Service Manager — Screens 01–15 (Auth, Attendance, Dashboard, Tasks, Navigation) */
 const SCREENS_A = [
   {
     num: 1,
@@ -26,22 +26,29 @@ const SCREENS_A = [
     num: 2,
     title: 'Login',
     group: 'Auth',
-    purpose: 'Engineer authentication via registered mobile number with country code prefix.',
-    elements: ['Mobile input +91 prefix', 'Continue CTA', 'Engineer login label', 'Privacy policy note', 'Shield icon'],
-    notes: 'Clean auth screen. Pre-filled partial number optional. Links to admin approval flow.',
+    purpose: 'Engineer authentication with registered mobile number (username) and password.',
+    elements: ['Mobile input +91 prefix', 'Password field with show toggle', 'Login CTA', 'Forgot password link', 'Privacy policy note'],
+    notes: 'Username = mobile number. Password required. On success, flow goes to Attendance Check In before Dashboard.',
     render() {
       return `${statusBar()}
 <div class="app-scroll">
   <div class="section-pad" style="padding-top:48px">
     <div class="logo-mark" style="width:56px;height:56px;border-radius:16px;font-size:18px;margin-bottom:24px">ER</div>
     <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.03em;margin-bottom:6px">Engineer Login</h2>
-    <p class="text-sec" style="font-size:13px;margin-bottom:28px">Sign in with your registered mobile number</p>
+    <p class="text-sec" style="font-size:13px;margin-bottom:28px">Sign in with your mobile number and password</p>
     <label class="label">Mobile Number</label>
     <div class="input-field mb-16">
       <span class="prefix">+91</span>
       <span class="value">98765 43210</span>
     </div>
-    <button class="btn btn-primary btn-block">${I.send} Continue</button>
+    <label class="label">Password</label>
+    <div class="input-field mb-8">
+      <span style="color:var(--text-muted);display:flex">${I.lock}</span>
+      <span class="value" style="letter-spacing:0.18em">••••••••</span>
+      <span style="color:var(--text-muted);display:flex">${I.eye}</span>
+    </div>
+    <p class="text-right mb-16" style="font-size:12px"><span class="text-accent fw-6">Forgot Password?</span></p>
+    <button class="btn btn-primary btn-block">${I.lock} Login</button>
     <div class="card glass mt-24" style="padding:14px;display:flex;gap:12px;align-items:flex-start">
       <div style="color:var(--primary);flex-shrink:0;margin-top:2px">${I.shield}</div>
       <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.55">Your data is encrypted end-to-end. By continuing you agree to our <span class="text-primary fw-6">Privacy Policy</span> and Terms of Service.</p>
@@ -54,41 +61,50 @@ const SCREENS_A = [
 
   {
     num: 3,
-    title: 'Waiting For Admin Approval',
-    group: 'Auth',
-    purpose: 'Pending state after registration — engineer awaits admin verification before app access.',
-    elements: ['Pending status badge', 'Ticket ER-ENG-2041', 'Clock icon', 'Contact support CTA', 'Refresh status button'],
-    notes: 'Amber warning tone. Shows registration ticket ID. Polling or manual refresh implied.',
+    title: 'Check In',
+    group: 'Attendance',
+    purpose: 'Mandatory daily attendance check-in after login — captures time, GPS location, and shift start before tasks unlock.',
+    elements: ['Check-in time', 'GPS location card', 'Shift date', 'Engineer identity', 'Check In CTA', 'Location accuracy chip'],
+    notes: 'Required after successful login. Tasks and navigation stay locked until check-in succeeds with GPS.',
     render() {
-      return `${statusBar()}
+      return `${statusBar('08:58')}
 <div class="app-scroll">
-  <div class="section-pad" style="padding-top:60px;text-align:center">
-    <div style="width:80px;height:80px;border-radius:50%;background:var(--warning-dim);display:grid;place-items:center;margin:0 auto;color:var(--warning)">${I.clock}</div>
-    <h2 style="font-size:22px;font-weight:800;margin-top:24px;letter-spacing:-0.03em">Awaiting Approval</h2>
-    <p class="text-sec" style="font-size:13px;margin-top:8px;line-height:1.5">Your engineer profile is under review by the admin team.</p>
-    <div class="chip chip-amber mt-20" style="font-size:12px;padding:8px 16px">${I.clock} Pending Verification</div>
+  <div class="section-pad" style="padding-top:32px">
+    ${header('Attendance', { back: false, right: I.more })}
+    <div style="text-align:center;padding-top:12px">
+      <div style="width:88px;height:88px;border-radius:50%;background:var(--primary-dim);display:grid;place-items:center;margin:0 auto;color:var(--primary);box-shadow:0 0 0 10px color-mix(in srgb, var(--primary) 12%, transparent)">${I.clock}</div>
+      <h2 style="font-size:22px;font-weight:800;margin-top:20px;letter-spacing:-0.03em">Daily Check In</h2>
+      <p class="text-sec" style="font-size:13px;margin-top:8px;line-height:1.5;max-width:280px;margin-left:auto;margin-right:auto">Mark your attendance to start the shift and unlock today's tasks.</p>
+    </div>
     <div class="card glass mt-24" style="text-align:left">
-      <div class="flex justify-between items-center mb-8">
-        <span class="text-muted" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Registration Ticket</span>
-        <span class="chip chip-slate">New</span>
+      <div class="flex justify-between items-center mb-12">
+        <span class="text-muted" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Shift Details</span>
+        <span class="chip chip-green">${I.wifi} GPS Ready</span>
       </div>
-      <p style="font-size:20px;font-weight:800;font-family:var(--mono);letter-spacing:0.02em;color:var(--primary)">ER-ENG-2041</p>
-      <div class="divider"></div>
       <div class="list-row" style="padding:8px 0">
         <div class="avatar sm">AM</div>
         <div class="flex-1">
           <div class="row-title">Arjun Mehta</div>
-          <div class="row-sub">Field Service Engineer · Bangalore</div>
+          <div class="row-sub">ER-ENG-2041 · Bangalore Hub</div>
         </div>
       </div>
-      <div class="flex gap-8 mt-8" style="font-size:11px;color:var(--text-muted)">
-        <span>${I.calendar} Submitted today</span>
-        <span>·</span>
-        <span>Est. 24 hrs</span>
+      <div class="divider"></div>
+      <div class="flex justify-between mb-10" style="font-size:13px">
+        <span class="text-muted">${I.calendar} Date</span>
+        <span class="fw-7">31 Jul 2026</span>
       </div>
+      <div class="flex justify-between mb-10" style="font-size:13px">
+        <span class="text-muted">${I.clock} Check-in Time</span>
+        <span class="fw-7" style="font-family:var(--mono)">08:58 AM</span>
+      </div>
+      <div class="flex justify-between" style="font-size:13px">
+        <span class="text-muted">${I.loc} Location</span>
+        <span class="fw-7" style="text-align:right">Koramangala Depot</span>
+      </div>
+      <p class="text-muted mt-8" style="font-size:11px;text-align:right">12.9352° N, 77.6245° E · ±12 m</p>
     </div>
-    <button class="btn btn-outline btn-block mt-20">${I.phone} Contact Support</button>
-    <button class="btn btn-ghost btn-block mt-8 btn-sm">Refresh Status</button>
+    <button class="btn btn-primary btn-block mt-24">${I.check} Check In &amp; Start Shift</button>
+    <p class="text-center text-muted mt-16" style="font-size:11.5px;line-height:1.5">Attendance is GPS-verified. Check out at end of shift from Home or Profile.</p>
   </div>
 </div>`;
     },
@@ -96,30 +112,65 @@ const SCREENS_A = [
 
   {
     num: 4,
-    title: 'Admin Approved',
-    group: 'Auth',
-    purpose: 'Success confirmation when admin approves engineer account — gateway to OTP verification.',
-    elements: ['Success burst icon', 'Approved message', 'Proceed to Login CTA', 'Welcome copy', 'Checkmark animation'],
-    notes: 'Green celebration screen. Single primary CTA to continue onboarding.',
+    title: 'Check Out',
+    group: 'Attendance',
+    purpose: 'End-of-day attendance check-out — records shift end time, hours worked, KM covered, and GPS before sign-off.',
+    elements: ['Check-out time', 'Hours worked summary', 'KM today', 'GPS location', 'Check Out CTA', 'Shift summary card'],
+    notes: 'Available from Dashboard or Profile after check-in. Completes daily attendance record.',
     render() {
-      return `${statusBar()}
+      return `${statusBar('18:05')}
 <div class="app-scroll">
-  <div class="section-pad" style="padding-top:72px;text-align:center">
-    <div class="success-burst">${I.check}</div>
-    <h2 style="font-size:24px;font-weight:800;margin-top:28px;letter-spacing:-0.03em">You're Approved!</h2>
-    <p class="text-sec" style="font-size:14px;margin-top:10px;line-height:1.55;max-width:280px;margin-left:auto;margin-right:auto">Welcome to E Royce, <span class="fw-7 text-primary">Arjun</span>. Your engineer account has been verified by admin.</p>
-    <div class="card glass mt-28" style="text-align:left;padding:14px">
-      <div class="flex items-center gap-12">
+  <div class="section-pad" style="padding-top:32px">
+    ${header('Attendance', { back: true, right: I.more })}
+    <div style="text-align:center;padding-top:12px">
+      <div style="width:88px;height:88px;border-radius:50%;background:var(--warning-dim);display:grid;place-items:center;margin:0 auto;color:var(--warning);box-shadow:0 0 0 10px color-mix(in srgb, var(--warning) 12%, transparent)">${I.logout}</div>
+      <h2 style="font-size:22px;font-weight:800;margin-top:20px;letter-spacing:-0.03em">Daily Check Out</h2>
+      <p class="text-sec" style="font-size:13px;margin-top:8px;line-height:1.5;max-width:280px;margin-left:auto;margin-right:auto">End your shift and submit today's attendance summary.</p>
+    </div>
+    <div class="card glass mt-24" style="text-align:left">
+      <div class="flex justify-between items-center mb-12">
+        <span class="text-muted" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Shift Summary</span>
+        <span class="chip chip-amber">${I.clock} Ending Shift</span>
+      </div>
+      <div class="list-row" style="padding:8px 0">
         <div class="avatar sm">AM</div>
         <div class="flex-1">
           <div class="row-title">Arjun Mehta</div>
-          <div class="row-sub">ER-ENG-2041 · Active</div>
+          <div class="row-sub">ER-ENG-2041 · Bangalore Hub</div>
         </div>
-        <span class="chip chip-green">${I.check} Verified</span>
       </div>
+      <div class="divider"></div>
+      <div class="grid-2 mb-12" style="gap:10px">
+        <div class="kpi-card kpi-green" style="min-height:72px;padding:12px">
+          <div class="kpi-label" style="font-size:9px">Checked In</div>
+          <div class="kpi-value" style="font-size:16px">08:58</div>
+        </div>
+        <div class="kpi-card kpi-orange" style="min-height:72px;padding:12px">
+          <div class="kpi-label" style="font-size:9px">Check Out</div>
+          <div class="kpi-value" style="font-size:16px">18:05</div>
+        </div>
+        <div class="kpi-card kpi-blue" style="min-height:72px;padding:12px">
+          <div class="kpi-label" style="font-size:9px">Hours Worked</div>
+          <div class="kpi-value" style="font-size:16px">9h 07m</div>
+        </div>
+        <div class="kpi-card kpi-cyan" style="min-height:72px;padding:12px">
+          <div class="kpi-label" style="font-size:9px">Today's KM</div>
+          <div class="kpi-value" style="font-size:16px">47.2</div>
+        </div>
+      </div>
+      <div class="flex justify-between mb-8" style="font-size:13px">
+        <span class="text-muted">${I.tasks} Tasks Done</span>
+        <span class="fw-7">4 / 8</span>
+      </div>
+      <div class="flex justify-between" style="font-size:13px">
+        <span class="text-muted">${I.loc} Check-out Location</span>
+        <span class="fw-7" style="text-align:right">Koramangala Depot</span>
+      </div>
+      <p class="text-muted mt-8" style="font-size:11px;text-align:right">12.9352° N, 77.6245° E · ±15 m</p>
     </div>
-    <button class="btn btn-primary btn-block mt-28">Proceed to Login ${I.chevron}</button>
-    <p class="text-muted mt-16" style="font-size:11px">Approved on 31 Jul 2026 · 09:12 AM</p>
+    <button class="btn btn-primary btn-block mt-24">${I.logout} Check Out &amp; End Shift</button>
+    <button class="btn btn-ghost btn-block mt-8 btn-sm">Cancel</button>
+    <p class="text-center text-muted mt-12" style="font-size:11.5px;line-height:1.5">You will go offline after check-out. Re-login tomorrow requires a fresh check-in.</p>
   </div>
 </div>`;
     },
@@ -127,44 +178,11 @@ const SCREENS_A = [
 
   {
     num: 5,
-    title: 'OTP Verification',
-    group: 'Auth',
-    purpose: 'Six-digit OTP entry to verify engineer mobile number after admin approval.',
-    elements: ['6 OTP input boxes', 'Partial fill 4-8-2', 'Resend timer 0:28', 'Verify CTA', 'Edit number link'],
-    notes: 'First three boxes filled (4, 8, 2), fourth active with cursor. Resend disabled until timer expires.',
-    render() {
-      return `${statusBar()}
-<div class="app-scroll">
-  <div class="section-pad" style="padding-top:32px">
-    ${header('Verify OTP', { back: true, right: I.more })}
-    <p class="text-sec" style="font-size:13px;margin-bottom:28px;line-height:1.5">Enter the 6-digit code sent to<br><span class="fw-7 text-primary">+91 98765 43210</span></p>
-    <div class="otp-boxes mb-16">
-      <div class="otp-box filled">4</div>
-      <div class="otp-box filled">8</div>
-      <div class="otp-box filled">2</div>
-      <div class="otp-box active"></div>
-      <div class="otp-box"></div>
-      <div class="otp-box"></div>
-    </div>
-    <p class="text-center text-muted" style="font-size:12px">Resend OTP in <span class="fw-7 text-warn" style="font-family:var(--mono)">0:28</span></p>
-    <button class="btn btn-primary btn-block mt-24">Verify &amp; Continue</button>
-    <p class="text-center mt-16" style="font-size:12px"><span class="text-muted">Wrong number?</span> <span class="text-accent fw-6">Edit</span></p>
-    <div class="card glass mt-28" style="padding:14px;display:flex;gap:10px;align-items:center">
-      <div style="color:var(--accent)">${I.shield}</div>
-      <p style="font-size:11px;color:var(--text-secondary);line-height:1.5">OTP expires in 10 minutes. Do not share this code with anyone.</p>
-    </div>
-  </div>
-</div>`;
-    },
-  },
-
-  {
-    num: 6,
     title: 'Dashboard',
     group: 'Dashboard',
-    purpose: 'Engineer home screen with KPIs, upcoming services, quick actions, and live status overview.',
-    elements: ['8 KPI cards', 'Upcoming services list', 'Quick action buttons', 'Circular progress 72%', 'Mini bar chart', 'Notification badge', 'Bottom nav Home active'],
-    notes: 'Primary hub after login. Shows Arjun Mehta greeting, live online status, and today\'s workload snapshot.',
+    purpose: 'Engineer home screen with KPIs, upcoming services, quick actions, attendance status, and live status overview.',
+    elements: ['Attendance checked-in banner', '8 KPI cards', 'Upcoming services list', 'Check Out quick action', 'Circular progress 72%', 'Bottom nav Home active'],
+    notes: 'Primary hub after check-in. Shows Checked In attendance state with option to Check Out at shift end.',
     render() {
       return `${statusBar()}
 <div class="app-scroll">
@@ -182,12 +200,22 @@ const SCREENS_A = [
         <div class="avatar sm">AM</div>
       </div>
     </div>
-    <div class="card glass mb-12" style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between">
-      <div class="flex items-center gap-8">
-        <span class="live-dot"></span>
-        <span style="font-size:13px;font-weight:650">Live Status: <span class="text-primary">Online</span></span>
+    <div class="card glass mb-12" style="padding:12px 14px">
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-8">
+          <span class="live-dot"></span>
+          <span style="font-size:13px;font-weight:650">Live Status: <span class="text-primary">Online</span></span>
+        </div>
+        <span class="chip chip-green">${I.wifi} GPS Active</span>
       </div>
-      <span class="chip chip-green">${I.wifi} GPS Active</span>
+      <div class="divider" style="margin:8px 0"></div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div style="font-size:12px;font-weight:650">${I.check} Checked In · 08:58 AM</div>
+          <div class="text-muted" style="font-size:11px;margin-top:2px">Koramangala Depot · Shift active</div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="padding:8px 12px;font-size:11px">${I.logout} Check Out</button>
+      </div>
     </div>
     <div class="grid-2 mb-10">
       <div class="kpi-card kpi-green">
@@ -287,7 +315,7 @@ ${bottomNav('home')}`;
   },
 
   {
-    num: 7,
+    num: 6,
     title: "Today's Tasks",
     group: 'Tasks',
     purpose: 'Filterable list of all scheduled service tasks for the current day with status and distance.',
@@ -395,7 +423,7 @@ ${bottomNav('tasks')}`;
   },
 
   {
-    num: 8,
+    num: 7,
     title: 'Task Details',
     group: 'Tasks',
     purpose: 'Full service job view with timeline, service type, and navigate-to-customer CTA.',
@@ -475,7 +503,7 @@ ${header('Task Details', { back: true, right: I.more })}
   },
 
   {
-    num: 9,
+    num: 8,
     title: 'Customer Details',
     group: 'Tasks',
     purpose: 'Customer profile with contact info, address, service history notes, and communication shortcuts.',
@@ -534,7 +562,7 @@ ${header('Customer Details', { back: true, right: I.edit })}
   },
 
   {
-    num: 10,
+    num: 9,
     title: 'Vehicle Details',
     group: 'Tasks',
     purpose: 'EV vehicle profile with registration, VIN, battery health, odometer, and service history.',
@@ -622,7 +650,7 @@ ${header('Vehicle Details', { back: true, right: I.qr })}
   },
 
   {
-    num: 11,
+    num: 10,
     title: 'Navigate To Customer',
     group: 'Navigation',
     purpose: 'Pre-navigation map view showing route, ETA, distance, and start navigation action.',
@@ -676,7 +704,7 @@ ${header('Vehicle Details', { back: true, right: I.qr })}
   },
 
   {
-    num: 12,
+    num: 11,
     title: 'Live GPS Tracking',
     group: 'Navigation',
     purpose: 'Real-time navigation with animated scooter marker, route overlay, HUD metrics, and customer bottom sheet.',
@@ -742,7 +770,7 @@ ${header('Vehicle Details', { back: true, right: I.qr })}
   },
 
   {
-    num: 13,
+    num: 12,
     title: 'Reach Customer',
     group: 'Navigation',
     purpose: 'Arrival confirmation screen with optional door photo capture before starting service.',
@@ -790,7 +818,7 @@ ${header('Reach Customer', { back: true, right: I.more })}
   },
 
   {
-    num: 14,
+    num: 13,
     title: 'Start Service OTP',
     group: 'Tasks',
     purpose: 'Customer OTP verification required before engineer can begin service work.',
@@ -833,7 +861,7 @@ ${header('Start Service', { back: true, right: I.more })}
   },
 
   {
-    num: 15,
+    num: 14,
     title: 'Service Checklist',
     group: 'Tasks',
     purpose: 'Safety and procedure checklist that engineer must complete during service.',
@@ -930,7 +958,7 @@ ${header('Service Checklist', { back: true, right: I.more })}
   },
 
   {
-    num: 16,
+    num: 15,
     title: 'Vehicle Inspection',
     group: 'Tasks',
     purpose: 'Detailed EV condition assessment with component ratings, photo evidence slots, and submit action.',

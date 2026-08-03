@@ -22,10 +22,10 @@ Then open http://127.0.0.1:8765
 
 ### What’s included
 
-- **42 production-quality mobile screens**
+- **41 production-quality mobile screens**
 - **Dark Mode (default)** + **Light Mode**
 - Premium enterprise design system (glassmorphism, gradient KPIs, Material 3 inspired)
-- Full engineer field-service flow: Login → Tasks → Live OSM Navigation → Quotation → Service → Invoice → QR Payment → Feedback
+- Full engineer field-service flow: Login (mobile + password) → Attendance Check In/Out → Tasks → Live OSM Navigation → Quotation → Service → Invoice → QR Payment → Feedback
 - Consistent sample journey data suitable for stakeholder demo
 
 See `wireframes/README.md` for the full screen inventory and controls.

@@ -1263,6 +1263,7 @@ body { overflow: hidden; }
 .justify-between { justify-content: space-between; }
 .flex-1 { flex: 1; }
 .text-center { text-align: center; }
+.text-right { text-align: right; }
 .w-full { width: 100%; }
 
 .safe-bottom { padding-bottom: 24px; }
